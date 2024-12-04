@@ -2,8 +2,10 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate  = useNavigate();
   const { createUser, user, setUser } = useContext(AuthContext);
   const {
     register,
@@ -19,7 +21,6 @@ const Signup = () => {
         console.log(result.user.metadata.creationTime);
         const createdAt = result?.user?.metadata?.creationTime;
         const newUser = { email, password, PhotoURL, createdAt };
-
         fetch("https://orchid-server.vercel.app/users", {
           method: "POST",
           headers: {
@@ -30,6 +31,7 @@ const Signup = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+            navigate("/");
           })
           .catch((err) => {
             console.log(err);
@@ -38,6 +40,7 @@ const Signup = () => {
       .catch((err) => {
         toast.error(`Something went wrong ${err}`);
       });
+      
   };
 
   return (
