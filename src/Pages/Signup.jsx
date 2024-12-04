@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate  = useNavigate();
@@ -109,6 +109,7 @@ const Signup = () => {
         )}
 
         <input className="btn bg-green-600 hover:bg-green-700 text-xl border-none text-white" type="submit" value="Sign Up"/>
+        <p className="text-white">Already you have a account please: <Link to='/login' className="text-red-800">Login Now</Link></p>
       </form>
     </div>
   );

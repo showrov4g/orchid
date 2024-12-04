@@ -1,5 +1,5 @@
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { auth } from "../Firebale/Firebase.init";
@@ -11,11 +11,15 @@ const AuthProvider = ({ children }) => {
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
+  const signInUser = (email, password)=>{
+   return signInWithEmailAndPassword(auth, email, password);
+  }
 
   const authInfo = {
     user,
     setUser,
     createUser,
+    signInUser
   };
 
   return (
