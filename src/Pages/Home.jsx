@@ -2,17 +2,12 @@ import React from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { Outlet } from "react-router-dom";
+import Slider from "../Components/Slider";
 
 const Home = () => {
   return (
     <div>
-      <div>
-        <Navbar></Navbar>
-      </div>
-      <div>
-        <Outlet></Outlet>
-      </div>
-      <Footer></Footer>
+      <Slider></Slider>
     </div>
   );
 };

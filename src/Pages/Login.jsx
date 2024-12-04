@@ -1,16 +1,42 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { signInUser, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const onSubmit = (data) => {
-    const {email, password} = data;
-    
+    const { email, Password } = data;
+    signInUser(email, Password)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        toast.success("User Login Successful");
+        navigate(location?.state ? location.state : "/");
+        const lastSignInTimes = result?.user?.metadata?.lastSignInTime;
+        const loginInfo = { email, lastSignInTimes };
+        fetch("https://orchid-server.vercel.app/users", {
+          method: "PATCH",
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(loginInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
-  console.log(errors);
   return (
     <div className="flex justify-center items-center">
       <form
@@ -23,11 +49,11 @@ const Login = () => {
         <input
           className="text-2xl p-3 rounded-xl"
           type="email"
-          placeholder="Email"
-          {...register("Email", { required: true })}
-          aria-invalid={errors.Email ? "true" : "false"}
+          placeholder="email"
+          {...register("email", { required: true })}
+          aria-invalid={errors.email ? "true" : "false"}
         />
-        {errors.Email?.type === "required" && (
+        {errors.email?.type === "required" && (
           <p className="text-red-600 text-xs" role="alert">
             Email name is required
           </p>

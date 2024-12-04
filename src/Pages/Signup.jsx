@@ -20,7 +20,10 @@ const Signup = () => {
         toast.success("You have successfully create your account");
         console.log(result.user.metadata.creationTime);
         const createdAt = result?.user?.metadata?.creationTime;
-        const newUser = { email, password, PhotoURL, createdAt };
+        const user = result.user;
+        setUser(user);
+        const newUser = { email, PhotoURL, createdAt };
+        
         fetch("https://orchid-server.vercel.app/users", {
           method: "POST",
           headers: {
