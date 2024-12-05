@@ -12,6 +12,9 @@ const Navbar = () => {
       <li>
         <NavLink to="/addMovies">Add New Movies</NavLink>
       </li>
+      <li>
+        <NavLink to="/allmovies">All Movies</NavLink>
+      </li>
     </>
   );
   return (

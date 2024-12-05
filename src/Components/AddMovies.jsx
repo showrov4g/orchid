@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const AddMovies = () => {
   const {
@@ -18,8 +19,14 @@ const AddMovies = () => {
       body: JSON.stringify(movies)
     })
     .then(res=>res.json())
-    .then(data => console.log(data))
-    .catch(err => console(err))
+    .then(data => {
+      toast.success("Your movies added successfully")
+      console.log(data)
+    })
+    .catch(err => {
+      toast.error(err.message);
+      console(err)
+    })
   };
   console.log(errors);
 

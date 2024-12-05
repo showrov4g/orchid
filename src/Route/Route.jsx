@@ -6,6 +6,7 @@ import Login from "../Pages/Login";
 import MainLayOut from "../MainLayout/MainLayOut";
 import PrivateRoute from "./PrivateRoute";
 import AddMovies from "../Components/AddMovies";
+import AllMovies from "../Pages/AllMovies";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
           element: <PrivateRoute>
             <AddMovies></AddMovies>
           </PrivateRoute>
+        },
+        {
+          path: "/allmovies",
+          element: <AllMovies></AllMovies>,
+          loader: ()=> fetch("https://orchid-server.vercel.app/movies")
         }
     ]
   },
