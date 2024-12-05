@@ -7,37 +7,46 @@ import MainLayOut from "../MainLayout/MainLayOut";
 import PrivateRoute from "./PrivateRoute";
 import AddMovies from "../Components/AddMovies";
 import AllMovies from "../Pages/AllMovies";
-
+import MoveDetails from "../Pages/MoveDetails";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayOut></MainLayOut>,
     errorElement: <ErrorPage></ErrorPage>,
-    children:[
+    children: [
       {
-        path:'/',
-        element: <Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
-        {
-            path:"signup",
-            element: <Signup></Signup>
-        },
-        {
-          path: "login",
-          element: <Login></Login>
-        },
-        {
-          path:"/addMovies",
-          element: <PrivateRoute>
+      {
+        path: "signup",
+        element: <Signup></Signup>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/addMovies",
+        element: (
+          <PrivateRoute>
             <AddMovies></AddMovies>
           </PrivateRoute>
-        },
-        {
-          path: "/allmovies",
-          element: <AllMovies></AllMovies>,
-          loader: ()=> fetch("http://localhost:5000/movies")
-        }
-    ]
+        ),
+      },
+      {
+        path: "/allmovies",
+        element: <AllMovies></AllMovies>,
+        loader: () => fetch("https://orchid-server.vercel.app/movies"),
+      },
+      {
+        path: '/details/:id',
+        element: <PrivateRoute>
+          <MoveDetails></MoveDetails>
+        </PrivateRoute>,
+        loader: ({params})=> fetch(`https://orchid-server.vercel.app/movies/${params.id}`)
+      }
+    ],
   },
 ]);
 

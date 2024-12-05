@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const AllMovies = () => {
   const moviesData = useLoaderData();
@@ -24,7 +24,7 @@ const AllMovies = () => {
               <p>Rating: {movie.rating}</p>
 
               <div className="card-actions justify-end">
-                <button className="btn btn-primary">See Details</button>
+                <Link to={`/details/${movie._id}`}>See Details</Link>
               </div>
             </div>
           </div>
