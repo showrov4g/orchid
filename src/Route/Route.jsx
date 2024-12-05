@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         {
           path: "/allmovies",
           element: <AllMovies></AllMovies>,
-          loader: ()=> fetch("https://orchid-server.vercel.app/movies")
+          loader: ()=> fetch("http://localhost:5000/movies")
         }
     ]
   },
