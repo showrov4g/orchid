@@ -19,7 +19,7 @@ const AllMovies = () => {
             <div className="card-body">
               <h2 className="card-title">Movie Title: {movie.movetitle}</h2>
               <p>Genre: {movie.genre}</p>
-              <p>Duration: {movie.duration}</p>
+              <p>Duration: {movie.duration} minutes</p>
               <p>Release Year: {movie.releaseyear}</p>
               <p>Rating: {movie.rating}</p>
 
