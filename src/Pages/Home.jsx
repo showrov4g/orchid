@@ -10,7 +10,9 @@ import NewsLetter from "../Components/NewsLetter";
 const Home = () => {
   return (
     <div>
+      <div className="-z-50">
       <Slider></Slider>
+      </div>
       <div>
         <Featured></Featured>
         <Gallary></Gallary>

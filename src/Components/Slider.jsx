@@ -15,7 +15,7 @@ import slide_7 from "../assets/images/slide (7).jpg"
 
 const Slider = () => {
     return (
-        <div>
+        <div className='z-10'>
             <Swiper
         slidesPerView={3}
         spaceBetween={30}

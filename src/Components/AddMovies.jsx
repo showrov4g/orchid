@@ -53,7 +53,7 @@ const AddMovies = () => {
     <div className="flex justify-center items-center w-11/12 mx-auto">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full grid gap-5 bg-[#219B9D] p-14 rounded-xl space-y-2"
+        className="w-full md:grid gap-5 p-3 bg-[#219B9D] md:p-14 rounded-xl space-y-2"
       >
         <label
           htmlFor=""
@@ -62,7 +62,7 @@ const AddMovies = () => {
           {" "}
           Move Poster
           <input
-            className="text-black p-2 outline-none rounded-sm"
+            className="text-black md:p-2 outline-none rounded-sm"
             type="url"
             placeholder="Move poster URL"
             {...register("moveposter", { required: true })}
@@ -82,7 +82,7 @@ const AddMovies = () => {
           {" "}
           Movie Title
           <input
-            className="text-black p-2 outline-none rounded-sm"
+            className="text-black md:p-2 outline-none rounded-sm"
             type="text"
             placeholder="Move Title"
             {...register("movetitle", { required: true, min: 1 })}
@@ -122,7 +122,7 @@ const AddMovies = () => {
         >
           Duration
           <input
-            className="text-black p-2 outline-none rounded-sm"
+            className="text-black md:p-2 outline-none rounded-sm"
             type="number"
             placeholder="duration"
             {...register("duration", { required: true, min: 60 })}
@@ -170,7 +170,7 @@ const AddMovies = () => {
           {" "}
           Rating
           <input
-            className="text-black p-2 outline-none rounded-sm"
+            className="text-black md:p-2 outline-none rounded-sm"
             type="text"
             placeholder="Rating"
             {...register("rating", { required: true })}

@@ -37,11 +37,11 @@ const Blog = () => {
     <div>
       <div className="my-4 w-3/4 mx-auto">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-5xl font-bold">Blogs</h1>
+          <h1 className="text-5xl font-bold my-4">Blogs</h1>
         </div>
         <div className="space-y-5 ">
           {blogs.map((blog) => (
-            <div className="flex items-center justify-center gap-5">
+            <div className="md:flex items-center justify-center gap-5">
               <div className="w-2/3 ">
                 <img src={blog.img} alt="" />
               </div>
@@ -63,7 +63,7 @@ const Blog = () => {
         </div>
       </div>
       {/* blog form */}
-      <div className="w-96 mx-auto mt-52">
+      <div className="md:w-96 mx-auto mt-52">
         <h1 className="text-3xl text-center font-semibold">Add your blog</h1>
         <form className="flex flex-col space-y-3" action="" onSubmit={blogPost}>
           <label htmlFor="" className="text-2xl font-semibold">
