@@ -8,6 +8,9 @@ import PrivateRoute from "./PrivateRoute";
 import AddMovies from "../Components/AddMovies";
 import AllMovies from "../Pages/AllMovies";
 import MoveDetails from "../Pages/MoveDetails";
+import MyFavorites from "../Pages/MyFavorites";
+import UpdateMovies from "../Pages/UpdateMovies";
+import Blog from "../Pages/Blog";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,11 +43,32 @@ const router = createBrowserRouter([
         loader: () => fetch("https://orchid-server.vercel.app/movies"),
       },
       {
-        path: '/details/:id',
+        path: "/details/:id",
+        element: (
+          <PrivateRoute>
+            <MoveDetails></MoveDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://orchid-server.vercel.app/movies/${params.id}`),
+      },
+      {
+        path:'/myFavorite',
         element: <PrivateRoute>
-          <MoveDetails></MoveDetails>
+          <MyFavorites></MyFavorites>
+        </PrivateRoute>,
+      },
+      {
+        path:'/updateMovies/:id',
+        element: <PrivateRoute>
+          <UpdateMovies></UpdateMovies>
         </PrivateRoute>,
         loader: ({params})=> fetch(`https://orchid-server.vercel.app/movies/${params.id}`)
+      },
+      {
+        path: '/blog',
+        element: <Blog></Blog>,
+        loader: ()=> fetch('https://orchid-server.vercel.app/blog?limit=6')
       }
     ],
   },

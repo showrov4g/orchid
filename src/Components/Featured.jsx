@@ -10,12 +10,14 @@ const Featured = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(movies);
   return (
-    <div>
-      <div>
-        
-        <div className="grid grid-cols-3 gap-6">
+    <div className="my-12">
+      <div className="flex flex-col justify-center items-center space-y-7">
+        <div className="text-center">
+          <h1 className="text-5xl font-bold">Featured Movies</h1>
+          <hr className= "h-1 bg-black" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {movies?.map((movie) => (
                    <div className="card card-compact bg-base-100 shadow-xl">
                    <figure>
@@ -32,13 +34,13 @@ const Featured = () => {
                      <p>Rating: {movie.rating}</p>
        
                      <div className="card-actions justify-end">
-                       <Link to={`/details/${movie._id}`}>See Details</Link>
+                       <Link to={`/details/${movie._id}`} className="btn btn-primary">See Details</Link>
                      </div>
                    </div>
                  </div>
         ))}
         </div>
-        <Link to="/allmovies" className="btn">
+        <Link to="/allmovies" className="btn btn-primary">
           See All Movies
         </Link>
       </div>

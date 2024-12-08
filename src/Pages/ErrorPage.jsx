@@ -1,11 +1,20 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
-    return (
-        <div>
-            <h1 className='text-8xl text-green-600 font-semibold'>Nothing is found</h1>
-        </div>
-    );
+  return (
+    <div className="flex flex-col justify-center items-center space-y-4">
+      <h1 className="text-9xl font-bold">OOPS!</h1>
+      <h3 className="text-3xl ">404 Page Not Found</h3>
+      <p>
+        this page your are looking for might have been removed or change
+        anything
+      </p>
+      <Link to="/">
+        <button className="btn bg-green-500">Go to home page</button>
+      </Link>
+    </div>
+  );
 };
 
 export default ErrorPage;

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const MoveDetails = () => {
+  const { user } = useContext(AuthContext);
+  const {email} =user;
   const details = useLoaderData();
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const {
     _id,
     duration,
@@ -15,6 +19,36 @@ const navigate = useNavigate();
     releaseyear,
     summary,
   } = details;
+  const favorite = {
+    email,
+    _id,
+    duration,
+    genre,
+    moveposter,
+    movetitle,
+    rating,
+    releaseyear,
+    summary,
+  };
+  // ============
+  const handleFavorite =() => {
+  
+    fetch("https://orchid-server.vercel.app/favorite", {
+          method: "POST",
+          headers:{
+            "content-type": "application/json"
+          },
+          body: JSON.stringify(favorite)
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        toast.success("successfully add ")
+        console.log(data)
+      })
+      .catch(err=>console.log(err))
+  };
+  // ==================
+
   const handleDelete = (_id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -26,8 +60,8 @@ const navigate = useNavigate();
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://orchid-server.vercel.app/movies/${_id}`,{
-            method: "DELETE"
+        fetch(`https://orchid-server.vercel.app/movies/${_id}`, {
+          method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
@@ -37,13 +71,32 @@ const navigate = useNavigate();
                 text: "Your file has been deleted.",
                 icon: "success",
               });
-              navigate('/allmovies')
+              navigate("/allmovies");
             }
           })
           .catch((err) => console.log(err));
       }
     });
   };
+  //  favorite
+  // const handleFavorite = () => {
+  //   fetch("https://orchid-server.vercel.app/favorite", {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(favorite),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       toast.success("You have successfully add to your Favorite");
+  //       console.log(data);
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message);
+  //     });
+  // };
+
   return (
     <div>
       <div className="card card-compact bg-base-100 w-6/12 shadow-xl mx-auto">
@@ -59,11 +112,16 @@ const navigate = useNavigate();
           <p className="text-2xl">Summary: {summary}</p>
           <div className="card-actions justify-end">
             <button className="btn btn-primary">
-              <Link to={"/"}>Got TO Home</Link>
+              <Link to={`/updateMovies/${_id}`}>Update Movies</Link>
             </button>
-            <button onClick={()=>handleDelete(_id)} className="btn btn-primary">Delete</button>
-            <button className="btn btn-primary">
-              Add To Favorite{" "}
+            <button
+              onClick={() => handleDelete(_id)}
+              className="btn btn-primary"
+            >
+              Delete
+            </button>
+            <button onClick={handleFavorite} className="btn btn-primary">
+              <Link to={handleFavorite}>Add To Favorite</Link>
             </button>
           </div>
         </div>

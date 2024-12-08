@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const AddMovies = () => {
+  const { user } = useContext(AuthContext);
+  const { email } = user;
   const {
     register,
     handleSubmit,
@@ -18,6 +22,7 @@ const AddMovies = () => {
       summary,
     } = data;
     const movies = {
+      email,
       duration,
       genre,
       moveposter,
@@ -26,7 +31,6 @@ const AddMovies = () => {
       releaseyear,
       summary,
     };
-    console.log(data);
     fetch("https://orchid-server.vercel.app/movies", {
       method: "POST",
       headers: {
@@ -37,14 +41,13 @@ const AddMovies = () => {
       .then((res) => res.json())
       .then((data) => {
         toast.success("Your movies added successfully");
-        console.log(data);
+       
       })
       .catch((err) => {
         toast.error(err.message);
-        console(err);
+        console.log(err);
       });
   };
-  console.log(errors);
 
   return (
     <div className="flex justify-center items-center w-11/12 mx-auto">
@@ -107,7 +110,10 @@ const AddMovies = () => {
                 movies Poster Url is required
               </p>
             )}
+            <option value=""></option>
             <option value="comedy">comedy</option>
+            <option value="drama">drama</option>
+            <option value="horror">horror</option>
           </select>
         </label>
         <label
@@ -124,7 +130,12 @@ const AddMovies = () => {
           />
           {errors.duration?.type === "required" && (
             <p className="text-red-600 text-xs" role="alert">
-              movies Poster Url is required
+              This field is required;
+            </p>
+          )}
+          {errors.duration?.type === "min" && (
+            <p className="text-red-600 text-xs" role="alert">
+              Duration must be more than 60
             </p>
           )}
         </label>
@@ -144,7 +155,7 @@ const AddMovies = () => {
                 movies Poster Url is required
               </p>
             )}
-            <option>Select </option>
+            <option></option>
             <option value="2024">2024</option>
             <option value="2023">2023</option>
             <option value="2022">2022</option>
@@ -179,12 +190,17 @@ const AddMovies = () => {
           summery
           <textarea
             className="text-black outline-none"
-            {...register("summary", { required: true, min: 10 })}
+            {...register("summary", { required: true, min: 10})}
             aria-invalid={errors.summary ? "true" : "false"}
           />
           {errors.summary?.type === "required" && (
             <p className="text-red-600 text-xs" role="alert">
               movies Poster Url is required
+            </p>
+          )}
+          {errors.summary?.type === "min" && (
+            <p className="text-red-600 text-xs" role="alert">
+              Summary must be grater than  10 character
             </p>
           )}
         </label>
