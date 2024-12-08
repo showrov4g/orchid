@@ -43,7 +43,6 @@ const UpdateMovies = () => {
     })
     .then(res=> res.json())
     .then(data => {
-        console.log(data);
         if(data.modifiedCount){
          toast.success("successfully Update")
         }
@@ -53,7 +52,6 @@ const UpdateMovies = () => {
     })
     .catch(err=>{
         toast.error(err.message);
-        console.log(err.message)
     })
    
   };

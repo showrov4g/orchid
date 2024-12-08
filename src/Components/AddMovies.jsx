@@ -45,7 +45,6 @@ const AddMovies = () => {
       })
       .catch((err) => {
         toast.error(err.message);
-        console.log(err);
       });
   };
 

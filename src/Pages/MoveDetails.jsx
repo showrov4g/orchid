@@ -43,9 +43,10 @@ const MoveDetails = () => {
       .then(res=>res.json())
       .then(data=>{
         toast.success("successfully add ")
-        console.log(data)
       })
-      .catch(err=>console.log(err))
+      .catch(err=>{
+        toast.error(err.message)
+      })
   };
   // ==================
 
@@ -74,7 +75,7 @@ const MoveDetails = () => {
               navigate("/allmovies");
             }
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {toast.error(err.message)});
       }
     });
   };

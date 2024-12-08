@@ -28,7 +28,6 @@ const Login = () => {
     const { email, Password } = data;
     signInUser(email, Password)
       .then((result) => {
-        console.log(result)
         const user = result.user;
         setUser(user);
         toast.success("User Login Successful");
@@ -43,8 +42,10 @@ const Login = () => {
           body: JSON.stringify(loginInfo)
         })
         .then(res=> res.json())
-        .then(data=>{"Sign in info update",console.log(data)})
-        .catch(err=>console.log(err))
+        .then(data=>{toast.success("Successfully Login")})
+        .catch(err=>{
+          toast.error(err.message)
+        })
 
         
       })

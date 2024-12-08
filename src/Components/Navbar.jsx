@@ -18,7 +18,7 @@ const Navbar = () => {
     e.preventDefault();
     setHover(true);
     document.getElementById("my_modal_1").showModal();
-    console.log("showrov ghosh");
+    
   };
   const hoverOut = (e) => {
     e.preventDefault();

@@ -44,11 +44,11 @@ const Signup = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            toast.success("User create successfully")
             navigate("/");
           })
           .catch((err) => {
-            console.log(err);
+            toast.error(err.message)
           });
       })
       .catch((err) => {

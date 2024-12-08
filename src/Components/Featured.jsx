@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Featured = () => {
   const [movies, setMovies] = useState();
@@ -7,7 +8,9 @@ const Featured = () => {
     fetch("https://orchid-server.vercel.app/movies?limit=6")
       .then((res) => res.json())
       .then((data) => setMovies(data))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error(err.message)
+      });
   }, []);
 
   return (

@@ -11,9 +11,10 @@ const MyFavorites = () => {
     .then(res=>res.json())
     .then(data => {
       setFavorite(data);
-      console.log(data)
     })
-    .catch(err=>console.log(err))
+    .catch(err=>{
+      toast.error(err.message)
+    })
   },[]);
 
   const handleDelete = (_id) => {
@@ -41,7 +42,7 @@ const MyFavorites = () => {
               navigate("/allmovies");
             }
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {toast.error(err.message)});
       }
     });
   };
