@@ -53,23 +53,29 @@ const router = createBrowserRouter([
           fetch(`https://orchid-server.vercel.app/movies/${params.id}`),
       },
       {
-        path:'/myFavorite',
-        element: <PrivateRoute>
-          <MyFavorites></MyFavorites>
-        </PrivateRoute>,
+        path: "/myFavorite",
+        element: (
+          <PrivateRoute>
+            <MyFavorites></MyFavorites>
+          </PrivateRoute>
+        ),
+        
       },
       {
-        path:'/updateMovies/:id',
-        element: <PrivateRoute>
-          <UpdateMovies></UpdateMovies>
-        </PrivateRoute>,
-        loader: ({params})=> fetch(`https://orchid-server.vercel.app/movies/${params.id}`)
+        path: "/updateMovies/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateMovies></UpdateMovies>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://orchid-server.vercel.app/movies/${params.id}`),
       },
       {
-        path: '/blog',
+        path: "/blog",
         element: <Blog></Blog>,
-        loader: ()=> fetch('https://orchid-server.vercel.app/blog?limit=6')
-      }
+        loader: () => fetch("https://orchid-server.vercel.app/blog?limit=6"),
+      },
     ],
   },
 ]);

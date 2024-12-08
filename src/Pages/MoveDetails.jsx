@@ -78,24 +78,7 @@ const MoveDetails = () => {
       }
     });
   };
-  //  favorite
-  // const handleFavorite = () => {
-  //   fetch("https://orchid-server.vercel.app/favorite", {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(favorite),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       toast.success("You have successfully add to your Favorite");
-  //       console.log(data);
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.message);
-  //     });
-  // };
+ 
 
   return (
     <div>
